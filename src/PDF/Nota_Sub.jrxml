@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Nota_Sub" language="groovy" pageWidth="226" pageHeight="170" columnWidth="226" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3a86a464-41fe-4ab2-9a41-8904ce62b029">
+	<property name="ireport.zoom" value="2.5937424601000028"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="Sub_No_Faktur" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     tr_cuci.`No_Faktur` AS ID,
+     (SELECT tb_jenislaundry.`item` FROM `tb_jenislaundry` WHERE tb_jenislaundry.`id`= `tr_cuci`.`id_JenisLaundry`)AS Item,
+     tr_cuci.`jenis_parfum` AS JenisParfum,
+     tr_cuci.`satuan_ukur` AS Satuan,
+     tr_cuci.`jml` AS Jml,
+     tr_cuci.`harga` AS Harga
+FROM
+     `tr_cuci` tr_cuci
+HAVING
+     tr_cuci.No_Faktur = $P{Sub_No_Faktur}]]>
+	</queryString>
+	<field name="ID" class="java.lang.Integer"/>
+	<field name="Item" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="JenisParfum" class="java.lang.String"/>
+	<field name="Satuan" class="java.lang.String"/>
+	<field name="Jml" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="Harga" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="53" height="20" uuid="f6121d0e-1ea9-4f1d-956d-a73e0a6f4409"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Item]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="53" y="0" width="54" height="20" uuid="57bc7893-8eb1-4302-94ba-3505a09bd5f1"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Parfum]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="107" y="0" width="33" height="20" uuid="442a8bdb-5f49-48f1-97b8-bc9711d02964"/>
+				<text><![CDATA[Satuan]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="152" y="0" width="19" height="20" uuid="f09cd0d3-d80b-464b-a1d0-8ba96401cfb9"/>
+				<text><![CDATA[Jml]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="0" width="55" height="20" uuid="0a70a437-99d9-41e0-87fd-42b892692e0a"/>
+				<textElement textAlignment="Center"/>
+				<text><![CDATA[Harga]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="19" width="226" height="1" uuid="7dff666b-8346-4118-b1fb-7984f6c5456c"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="1" width="53" height="20" uuid="ed1043e8-0686-41bc-953a-72c3d1e34365"/>
+				<textFieldExpression><![CDATA[$F{Item}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="53" y="1" width="54" height="20" uuid="366bf4cf-3ba5-4366-a2a8-5889010acbf5"/>
+				<textFieldExpression><![CDATA[$F{JenisParfum}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="107" y="1" width="33" height="20" uuid="4a1d6d7b-c46c-49da-b022-4d8cf76a3c0e"/>
+				<textFieldExpression><![CDATA[$F{Satuan}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="152" y="0" width="19" height="20" uuid="a5586af6-133d-42d2-9978-eae1e34e39ce"/>
+				<textFieldExpression><![CDATA[$F{Jml}]]></textFieldExpression>
+			</textField>
+			<textField pattern="Rp #,##0">
+				<reportElement x="171" y="1" width="55" height="20" uuid="4aeb7acd-3a7f-4cb9-b824-761d429c6f4b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{Harga}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>
